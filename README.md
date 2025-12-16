@@ -5,6 +5,6 @@
 
   # GangGavinLi's Website
 
-  Visit **[website url](#)** 🚀
+  Visit **[ganggavinli.github.io/lab-website](https://ganggavinli.github.io/lab-website)** 🚀
 
   _Built with [Lab Website Template](https://greene-lab.gitbook.io/lab-website-template-docs)_
