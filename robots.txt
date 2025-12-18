@@ -1,1 +1,1 @@
-Sitemap: https://ganggavinli.github.io/lab-website-template/sitemap.xml
+Sitemap: https://ganggavinli.github.io/lab-website/sitemap.xml
