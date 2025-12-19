@@ -1,5 +1,5 @@
 ---
-title: News & Updates
+title: News
 nav:
   order: 1
   tooltip: Lab news and announcements
