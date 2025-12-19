@@ -37,9 +37,9 @@ defaults:
       layout: post
    # markdown files in /_blogs
   - scope:
-      type: "blogs"
+      type: "blog"
     values:
-      layout: blog
+      layout: post
 
 collections:
   # generate page for each member
@@ -47,6 +47,9 @@ collections:
     output: true
   # generate page for each post
   posts:
+    output: true
+  # generate page for each learning material
+  blog:
     output: true
 
 # jekyll plugins
