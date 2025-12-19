@@ -1,6 +1,6 @@
 ---
 name: William Mayfield
-image: images/photo.jpg
+image: images/members/william-mayfield.jpg
 role: phd
 links:
   email: mayfield@example.edu
