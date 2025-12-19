@@ -2,10 +2,9 @@
 title: "Lab Achieves 'Triple-Double' Research Milestone"
 author: gang-li
 tags:
-  - lab news
-  - research funding
-  - team growth
-  - renewable energy
+  - awards
+  - recognition
+  - milestone
 ---
 
 We're excited to share that our research group has reached a major milestone that we're calling our "Triple-Double" achievement - significant growth across funding, students, and research output!
