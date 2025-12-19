@@ -1,0 +1,33 @@
+---
+---
+
+.blog-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 20px 0;
+  color: var(--dark-gray);
+}
+
+.blog-info .portrait {
+  margin: 0;
+}
+
+.blog-info .icon {
+  margin-right: 0.5em;
+}
+
+.blog-info a {
+  color: inherit;
+}
+
+.blog-info a:hover {
+  color: var(--primary);
+}
+
+.blog-info > span {
+  text-align: center;
+  white-space: nowrap;
+}
