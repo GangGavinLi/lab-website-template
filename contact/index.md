@@ -70,7 +70,7 @@ Please describe your research interests and how you envision a potential collabo
 
 {% include cols.html col1=col1 col2=col2 %}
 
-{% include section.html dark=true %}
+{% include section.html %}
 
 ## Research Areas
 
