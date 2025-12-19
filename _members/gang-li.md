@@ -7,11 +7,10 @@ aliases:
   - G. Li
   - Gang Li
 links:
-  home-page: https://ganggavinli.github.io
+  home-page: https://www.me.msstate.edu/people/faculty/gang-li/
   orcid: 0000-0003-2793-4615
-  google-scholar: ETJoidYAAAAJ
+  google-scholar: _PR2PgEAAAAJ&hl=en
   email: gli@me.msstate.edu
-  github: GangGavinLi
 ---
 
 Dr. Gang Li is an Assistant Professor in the Michael W. Hall School of Mechanical Engineering at Mississippi State University. His research focuses on intelligent energy systems, AI-enabled predictive maintenance, and advanced mechanical design for renewable energy applications.
