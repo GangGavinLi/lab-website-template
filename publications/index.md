@@ -1,20 +1,19 @@
 ---
-title: Research
+title: Publications
 nav:
-  order: 1
+  order: 2
   tooltip: Published works
 ---
 
-# {% include icon.html icon="fa-solid fa-microscope" %}Research
+# {% include icon.html icon="fa-solid fa-microscope" %}Publications
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Our lab conducts cutting-edge research at the intersection of artificial intelligence, mechanical engineering, and renewable energy systems. We develop innovative solutions for sustainable energy infrastructure, focusing on predictive maintenance, advanced drivetrains, and intelligent control systems.
 
 {% include section.html %}
 
 ## Highlighted
 
-{% include citation.html lookup="Open collaborative writing with Manubot" style="rich" %}
+{% include citation.html lookup="Multivariate CNN-Bi-LSTM temporal production forecasting" style="rich" %}
 
 {% include section.html %}
 
