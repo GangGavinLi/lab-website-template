@@ -14,8 +14,6 @@
   plugin: sources.py
   file: sources.yaml
   image: images/publications/2026-doha-h2.jpg
-  description: Multivariate CNN-Bi-LSTM model achieves 4.1% MAPE in hydrogen production
-    forecasting from distributed wind systems.
 - id: doi:10.1016/j.mechmachtheory.2025.106286
   title: An analytical mesh stiffness model of high-contact-ratio spur gears covering
     multiple structure coupling effects
@@ -61,8 +59,6 @@
   plugin: sources.py
   file: sources.yaml
   image: images/publications/cable-monitoring.jpg
-  description: CNN-LSTM architecture enhanced with physics knowledge enables early
-    fault detection in underground power cables.
 - id: doi:10.1115/es2025-156364
   title: An Enhanced Federated Learning Framework for Condition Monitoring of Distributed
     Wind Systems
@@ -76,8 +72,6 @@
   plugin: sources.py
   file: sources.yaml
   image: images/publications/federated-wind.jpg
-  description: Privacy-preserving federated learning framework enables collaborative
-    condition monitoring across distributed wind farms without sharing SCADA data.
 - id: doi:10.1115/es2025-156886
   title: Time-Series AI Forecasting of Wind-to-Hydrogen Production
   authors:
@@ -116,8 +110,6 @@
   plugin: sources.py
   file: sources.yaml
   image: images/publications/wind-forecasting.jpg
-  description: Extended LSTM network improves wind energy forecasting accuracy by
-    15% compared to traditional methods.
 - id: doi:10.3390/sym17050689
   title: Multi-Domain Digital Twin and Real-Time Performance Optimization for Marine
     Steam Turbines
@@ -272,8 +264,6 @@
   plugin: sources.py
   file: sources.yaml
   image: images/publications/ivt-control.jpg
-  description: Novel control system for infinitely variable transmission maximizes
-    tidal energy capture with 94% efficiency.
 - id: doi:10.1016/j.rser.2023.113269
   title: 'Tidal current energy harvesting technologies: A review of current status
     and life cycle assessment'
