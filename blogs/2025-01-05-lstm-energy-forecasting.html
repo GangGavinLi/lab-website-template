@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en" data-dark="false">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!--
+  put your analytics (e.g. Google Analytics) tracking code here
+-->
+
+  <!--
+  put your search engine verification (e.g. Google Search Console) tag here
+-->
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>LSTM Networks for Energy Time-Series Forecasting | Gang Li Research Lab</title>
+
+<link rel="icon" href="/lab-website/images/icon.png">
+
+<meta name="title" content="LSTM Networks for Energy Time-Series Forecasting">
+<meta name="description" content="Intelligent Energy Systems &amp; Advanced Mechanical Design. Pioneering AI-enabled predictive maintenance, renewable energy systems, and advanced drivetrain technologies for sustainable infrastructure resilience.">
+
+<meta property="og:title" content="LSTM Networks for Energy Time-Series Forecasting">
+<meta property="og:site_title" content="Gang Li Research Lab">
+<meta property="og:description" content="Intelligent Energy Systems &amp; Advanced Mechanical Design. Pioneering AI-enabled predictive maintenance, renewable energy systems, and advanced drivetrain technologies for sustainable infrastructure resilience.">
+<meta property="og:url" content="https://ganggavinli.github.io/lab-website">
+<meta property="og:image" content="/lab-website/images/share.jpg">
+<meta property="og:locale" content="en_US">
+
+<meta property="twitter:title" content="LSTM Networks for Energy Time-Series Forecasting">
+<meta property="twitter:description" content="Intelligent Energy Systems &amp; Advanced Mechanical Design. Pioneering AI-enabled predictive maintenance, renewable energy systems, and advanced drivetrain technologies for sustainable infrastructure resilience.">
+<meta property="twitter:url" content="https://ganggavinli.github.io/lab-website">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:image" content="/lab-website/images/share.jpg">
+
+
+  <meta name="author" content="doha-bounaim">
+  <meta property="og:type" content="article">
+  <meta property="og:updated_time" content="2025-12-19T14:49:35+00:00">
+  <meta property="article:published_time" content="2025-01-05T00:00:00+00:00">
+  <meta property="article:modified_time" content="2025-12-19T14:49:35+00:00">
+  <meta name="revised" content="2025-12-19T14:49:35+00:00">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "BlogPosting",
+      "author": { "@type": "Person", "name": "LSTM Networks for Energy Time-Series Forecasting" },
+      "datePublished": "2025-01-05T00:00:00+00:00",
+      "dateModified": "2025-12-19T14:49:35+00:00",
+    
+    "name": "LSTM Networks for Energy Time-Series Forecasting",
+    "description": "Intelligent Energy Systems &amp; Advanced Mechanical Design. Pioneering AI-enabled predictive maintenance, renewable energy systems, and advanced drivetrain technologies for sustainable infrastructure resilience.",
+    "headline": "LSTM Networks for Energy Time-Series Forecasting",
+    "publisher": {
+      "@type": "Organization",
+      "logo": { "@type": "ImageObject", "url": "/lab-website/images/icon.png" }
+    },
+    "url": "https://ganggavinli.github.io/lab-website"
+  }
+</script>
+
+<link rel="alternate" type="application/rss+xml" href="https://ganggavinli.github.io/lab-website/feed.xml">
+
+  <!-- Google Fonts -->
+<!-- automatically get url from fonts used in theme file -->
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?display=swap&&family=Barlow:ital,wght@0,200;0,400;0,500;0,600;1,200;1,400;1,500;1,600&amp;family=Roboto+Mono:ital,wght@0,200;0,400;0,500;0,600;1,200;1,400;1,500;1,600" rel="stylesheet">
+
+<!-- Font Awesome icons (load asynchronously due to size) -->
+
+<link href="https://use.fontawesome.com/releases/v6.7.0/css/all.css" rel="stylesheet" media="none" onload="this.removeAttribute('media'); this.onload = null;">
+<noscript>
+  <link href="https://use.fontawesome.com/releases/v6.7.0/css/all.css" rel="stylesheet">
+</noscript>
+
+  <!-- third party styles -->
+<!-- https://stylishthemes.github.io/Syntax-Themes/pygments/ -->
+<link href="https://cdn.jsdelivr.net/gh/StylishThemes/Syntax-Themes/pygments/css-github/pygments-tomorrow-night-eighties.css" rel="stylesheet">
+
+<!-- include all sass in styles folder -->
+
+
+  
+    <link href="/lab-website/_styles/-theme.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/alert.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/all.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/anchor.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/background.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/blog-excerpt.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/blog-info" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/blog-nav.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/body.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/bold.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/button.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/card.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/checkbox.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/citation.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/code.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/cols.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/dark-toggle.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/details.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/feature.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/figure.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/float.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/font.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/footer.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/form.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/grid.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/header.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/heading.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/highlight.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/icon.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/image.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/link.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/list.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/main.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/paragraph.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/portrait.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/post-excerpt.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/post-info.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/post-nav.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/quote.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/rule.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/search-box.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/search-info.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/section.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/table.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/tags.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/textbox.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/tooltip.css" rel="stylesheet">
+  
+
+  
+    <link href="/lab-website/_styles/util.css" rel="stylesheet">
+  
+
+
+<!-- include all css in styles folder -->
+
+
+
+  <!-- third party scripts -->
+<script src="https://unpkg.com/@popperjs/core@2" defer></script>
+<script src="https://unpkg.com/tippy.js@6" defer></script>
+<script src="https://unpkg.com/mark.js@8" defer></script>
+
+<!-- include all js in scripts folder -->
+
+
+  <script src="/lab-website/_scripts/anchors.js"></script>
+
+  <script src="/lab-website/_scripts/dark-mode.js"></script>
+
+  <script src="/lab-website/_scripts/fetch-tags.js"></script>
+
+  <script src="/lab-website/_scripts/search.js"></script>
+
+  <script src="/lab-website/_scripts/site-search.js"></script>
+
+  <script src="/lab-website/_scripts/table-wrap.js"></script>
+
+  <script src="/lab-website/_scripts/tooltip.js"></script>
+
+
+</head>
+
+  <body>
+    
+
+
+
+
+
+
+
+<header class="background" style="--image: url('/lab-website/images/background.jpg')" data-dark="true">
+  <a href="/lab-website/" class="home">
+    
+      <span class="logo">
+        
+          <svg xmlns="http://www.w3.org/2000/svg" viewbox="-40 -60 80 100">
+  <style>
+    .bubble {
+      animation: float 2s ease-out both infinite var(--delay);
+    }
+    @keyframes float {
+      0% {
+        opacity: 0;
+      }
+      50% {
+        transform: translateY(0);
+        opacity: 0;
+      }
+      75% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+    }
+  </style>
+  <g fill="currentColor" opacity="0.5">
+    <circle class="bubble" cx="0" cy="-10" r="3" style="--delay: 0.1s"></circle>
+    <circle class="bubble" cx="0" cy="-10" r="3" style="--delay: 0.4s"></circle>
+    <circle class="bubble" cx="0" cy="-10" r="3" style="--delay: 1.1s"></circle>
+  </g>
+  <path fill="#38bdf8" d="
+      M 0 -22.5
+      L -19.5 -11.25
+      L -19.5 11.25
+      L 0 22.5
+      L 19.5 11.25
+      L 19.5 -11.25
+      z
+    "></path>
+  <path fill="#bae6fd" d="
+      M 0 -22.5
+      L -19.5 -11.25
+      L 0 0
+      L 19.5 -11.25
+      z
+    "></path>
+  <path fill="none" stroke="currentColor" stroke-width="5" d="
+      M -18 -53
+      L -10 -53
+      L -10 -29.2
+      L -30.3 -17.5
+      L -30.3 17.5
+      L 0 35
+      L 30.3 17.5
+      L 30.3 -17.5
+      L 10 -29.2
+      L 10 -53
+      L 18 -53
+    "></path>
+</svg>
+
+        
+      </span>
+    
+    
+      <span class="title-text" data-tooltip="Home">
+        
+          <span class="title">Gang Li Research Lab</span>
+        
+        
+          <span class="subtitle">Intelligent Energy Systems &amp; Advanced Mechanical Design</span>
+        
+      </span>
+    
+  </a>
+
+  <input class="nav-toggle" type="checkbox" aria-label="show/hide nav">
+
+  <nav>
+    
+    
+      
+        <a href="/lab-website/news/" data-tooltip="Lab news and announcements">
+          News &amp; Updates
+        </a>
+      
+    
+      
+        <a href="/lab-website/research/" data-tooltip="Research areas">
+          Research
+        </a>
+      
+    
+      
+        <a href="/lab-website/publications/" data-tooltip="Published works">
+          Publications
+        </a>
+      
+    
+      
+        <a href="/lab-website/projects/" data-tooltip="Funding and Research projects">
+          Projects
+        </a>
+      
+    
+      
+        <a href="/lab-website/team/" data-tooltip="About our team">
+          Team
+        </a>
+      
+    
+      
+        <a href="/lab-website/blog/" data-tooltip="Learning Materials and Musings">
+          Blog
+        </a>
+      
+    
+      
+        <a href="/lab-website/contact/" data-tooltip="Get in touch with us">
+          Contact
+        </a>
+      
+    
+  </nav>
+</header>
+
+    <main>
+      <!--
+  modify main content of page:
+  - add section breaks
+  - attach section properties
+  - filter out blank sections
+-->
+
+
+
+
+
+
+  
+  
+  
+
+  <section class="background" data-size="1">
+    <!--
+  <background></background>
+  <dark></dark>
+  <size>1</size>
+-->
+
+
+<h1 class="center">LSTM Networks for Energy Time-Series Forecasting</h1>
+
+<div class="post-info">
+  
+    
+    
+      
+      
+        
+
+
+
+<div class="portrait-wrapper">
+  <a href="/lab-website/members/doha-bounaim.html" class="portrait" data-style="tiny" aria-label="Doha Bounaim">
+    
+      <i class="icon fa-solid fa-graduation-cap"></i>
+    
+
+    <img src="/lab-website/images/photo.jpg" class="portrait-image" alt="member portrait" loading="lazy" onerror="this.src = '/lab-website/images/fallback.svg'; this.onerror = null;">
+
+    
+      <span class="portrait-name">
+        Doha Bounaim
+      </span>
+    
+
+    
+      <span class="portrait-description">
+        PhD Student
+      </span>
+    
+
+    
+  </a>
+</div>
+
+      
+    
+  
+
+  
+  
+
+  
+    <span data-tooltip="Originally published on">
+      <i class="icon fa-regular fa-calendar"></i>
+      <span>January 05, 2025</span>
+    </span>
+  
+
+  
+    <span data-tooltip="Last updated on">
+      <i class="icon fa-solid fa-clock-rotate-left"></i>
+      <span>December 19, 2025</span>
+    </span>
+  
+</div>
+
+
+  
+
+
+  <div class="tags">
+    
+      <a href="/lab-website/blog?search=%22tag:%20lstm%22" class="tag" data-tooltip='Show items with the tag "lstm"'>
+        lstm
+      </a>
+    
+      <a href="/lab-website/blog?search=%22tag:%20deep-learning%22" class="tag" data-tooltip='Show items with the tag "deep-learning"'>
+        deep-learning
+      </a>
+    
+      <a href="/lab-website/blog?search=%22tag:%20forecasting%22" class="tag" data-tooltip='Show items with the tag "forecasting"'>
+        forecasting
+      </a>
+    
+      <a href="/lab-website/blog?search=%22tag:%20tutorial%22" class="tag" data-tooltip='Show items with the tag "tutorial"'>
+        tutorial
+      </a>
+    
+      <a href="/lab-website/blog?search=%22tag:%20time-series%22" class="tag" data-tooltip='Show items with the tag "time-series"'>
+        time-series
+      </a>
+    
+  </div>
+  </section>
+
+  
+  
+  
+
+  <section class="background" data-size="page">
+    <!--
+  <background></background>
+  <dark></dark>
+  <size></size>
+-->
+
+
+<p>Long Short-Term Memory (LSTM) networks have become the gold standard for time-series forecasting in energy systems. This tutorial covers the fundamentals and practical implementation for wind-to-hydrogen production forecasting.</p>
+
+<!-- excerpt start -->
+<p>Master LSTM networks for energy forecasting with practical examples in wind-to-hydrogen production prediction, from basic concepts to advanced architectures.
+<!-- excerpt end --></p>
+
+<h2 id="why-lstm-for-energy-forecasting">Why LSTM for Energy Forecasting?</h2>
+
+<p>Traditional forecasting methods struggle with:</p>
+<ul>
+  <li>Long-term dependencies in time series</li>
+  <li>Non-linear relationships</li>
+  <li>Multiple interacting variables</li>
+  <li>Irregular patterns</li>
+</ul>
+
+<p>LSTMs solve these problems through their memory cell architecture.</p>
+
+<h2 id="lstm-architecture-basics">LSTM Architecture Basics</h2>
+
+<h3 id="the-memory-cell">The Memory Cell</h3>
+
+<p>An LSTM cell has three gates that control information flow:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="n">nn</span>
+
+<span class="k">class</span> <span class="nc">LSTMCell</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">hidden_size</span> <span class="o">=</span> <span class="n">hidden_size</span>
+        
+        <span class="c1"># Forget gate
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">forget_gate</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_size</span> <span class="o">+</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span>
+        
+        <span class="c1"># Input gate
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">input_gate</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_size</span> <span class="o">+</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">cell_gate</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_size</span> <span class="o">+</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span>
+        
+        <span class="c1"># Output gate
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">output_gate</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_size</span> <span class="o">+</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="gate-functions">Gate Functions</h3>
+
+<ol>
+  <li>
+<strong>Forget Gate</strong>: Decides what to forget from previous state
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">f_t = σ(W_f · [h_{t-1}, x_t] + b_f)</code></li>
+    </ul>
+  </li>
+  <li>
+<strong>Input Gate</strong>: Decides what new information to store
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">i_t = σ(W_i · [h_{t-1}, x_t] + b_i)</code></li>
+      <li><code class="language-plaintext highlighter-rouge">C̃_t = tanh(W_C · [h_{t-1}, x_t] + b_C)</code></li>
+    </ul>
+  </li>
+  <li>
+<strong>Output Gate</strong>: Decides what to output
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">o_t = σ(W_o · [h_{t-1}, x_t] + b_o)</code></li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="building-an-energy-forecasting-model">Building an Energy Forecasting Model</h2>
+
+<h3 id="step-1-data-preparation">Step 1: Data Preparation</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+
+<span class="k">def</span> <span class="nf">prepare_energy_data</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">sequence_length</span><span class="o">=</span><span class="mi">24</span><span class="p">):</span>
+    <span class="s">"""
+    Prepare wind-to-hydrogen production data
+    
+    Features:
+    - Wind speed (m/s)
+    - Wind direction (degrees)
+    - Temperature (°C)
+    - Pressure (hPa)
+    - Historical hydrogen production (kg/h)
+    """</span>
+    <span class="c1"># Normalize data
+</span>    <span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+    <span class="n">scaled_data</span> <span class="o">=</span> <span class="n">scaler</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    
+    <span class="c1"># Create sequences
+</span>    <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">scaled_data</span><span class="p">)</span> <span class="o">-</span> <span class="n">sequence_length</span><span class="p">):</span>
+        <span class="n">X</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">scaled_data</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">sequence_length</span><span class="p">])</span>
+        <span class="n">y</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">scaled_data</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">sequence_length</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># Production
+</span>    
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">scaler</span>
+</code></pre></div></div>
+
+<h3 id="step-2-model-architecture">Step 2: Model Architecture</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">EnergyForecastLSTM</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">hidden_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.2</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">lstm</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">LSTM</span><span class="p">(</span>
+            <span class="n">input_size</span><span class="o">=</span><span class="n">input_size</span><span class="p">,</span>
+            <span class="n">hidden_size</span><span class="o">=</span><span class="n">hidden_size</span><span class="p">,</span>
+            <span class="n">num_layers</span><span class="o">=</span><span class="n">num_layers</span><span class="p">,</span>
+            <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">,</span>
+            <span class="n">batch_first</span><span class="o">=</span><span class="bp">True</span>
+        <span class="p">)</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="c1"># x shape: (batch, sequence, features)
+</span>        <span class="n">lstm_out</span><span class="p">,</span> <span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">lstm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+        <span class="c1"># Use last hidden state
+</span>        <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fc</span><span class="p">(</span><span class="n">lstm_out</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="k">return</span> <span class="n">prediction</span>
+</code></pre></div></div>
+
+<h3 id="step-3-training-loop">Step 3: Training Loop</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">train_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">MSELoss</span><span class="p">()</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">optim</span><span class="p">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+    <span class="n">scheduler</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">optim</span><span class="p">.</span><span class="n">lr_scheduler</span><span class="p">.</span><span class="n">ReduceLROnPlateau</span><span class="p">(</span>
+        <span class="n">optimizer</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">'min'</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.5</span>
+    <span class="p">)</span>
+    
+    <span class="n">best_val_loss</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s">'inf'</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="c1"># Training
+</span>        <span class="n">model</span><span class="p">.</span><span class="n">train</span><span class="p">()</span>
+        <span class="n">train_loss</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">batch_X</span><span class="p">,</span> <span class="n">batch_y</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
+            <span class="n">optimizer</span><span class="p">.</span><span class="n">zero_grad</span><span class="p">()</span>
+            <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">batch_X</span><span class="p">)</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">predictions</span><span class="p">.</span><span class="n">squeeze</span><span class="p">(),</span> <span class="n">batch_y</span><span class="p">)</span>
+            <span class="n">loss</span><span class="p">.</span><span class="n">backward</span><span class="p">()</span>
+            <span class="n">optimizer</span><span class="p">.</span><span class="n">step</span><span class="p">()</span>
+            <span class="n">train_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="p">.</span><span class="n">item</span><span class="p">()</span>
+        
+        <span class="c1"># Validation
+</span>        <span class="n">model</span><span class="p">.</span><span class="nb">eval</span><span class="p">()</span>
+        <span class="n">val_loss</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">batch_X</span><span class="p">,</span> <span class="n">batch_y</span> <span class="ow">in</span> <span class="n">val_loader</span><span class="p">:</span>
+                <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">batch_X</span><span class="p">)</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">predictions</span><span class="p">.</span><span class="n">squeeze</span><span class="p">(),</span> <span class="n">batch_y</span><span class="p">)</span>
+                <span class="n">val_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="p">.</span><span class="n">item</span><span class="p">()</span>
+        
+        <span class="c1"># Learning rate scheduling
+</span>        <span class="n">scheduler</span><span class="p">.</span><span class="n">step</span><span class="p">(</span><span class="n">val_loss</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">val_loss</span> <span class="o">&lt;</span> <span class="n">best_val_loss</span><span class="p">:</span>
+            <span class="n">best_val_loss</span> <span class="o">=</span> <span class="n">val_loss</span>
+            <span class="n">torch</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s">'best_model.pth'</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s">: Train Loss = </span><span class="si">{</span><span class="n">train_loss</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">, '</span>
+                  <span class="sa">f</span><span class="s">'Val Loss = </span><span class="si">{</span><span class="n">val_loss</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">model</span>
+</code></pre></div></div>
+
+<h2 id="advanced-architecture-bidirectional-lstm">Advanced Architecture: Bidirectional LSTM</h2>
+
+<p>Bidirectional LSTMs process sequences in both directions:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">BiLSTMForecaster</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">hidden_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">()</span>
+        
+        <span class="c1"># Bidirectional LSTM
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">bilstm</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">LSTM</span><span class="p">(</span>
+            <span class="n">input_size</span><span class="o">=</span><span class="n">input_size</span><span class="p">,</span>
+            <span class="n">hidden_size</span><span class="o">=</span><span class="n">hidden_size</span><span class="p">,</span>
+            <span class="n">num_layers</span><span class="o">=</span><span class="n">num_layers</span><span class="p">,</span>
+            <span class="n">batch_first</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+            <span class="n">bidirectional</span><span class="o">=</span><span class="bp">True</span>  <span class="c1"># Key difference
+</span>        <span class="p">)</span>
+        
+        <span class="c1"># Note: hidden_size * 2 because bidirectional
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_size</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">bilstm_out</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">bilstm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fc</span><span class="p">(</span><span class="n">bilstm_out</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="k">return</span> <span class="n">prediction</span>
+</code></pre></div></div>
+
+<h2 id="multivariate-cnn-bilstm-architecture">Multivariate CNN-BiLSTM Architecture</h2>
+
+<p>Our research uses this hybrid architecture for superior performance:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">CNNBiLSTMForecaster</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">hidden_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">()</span>
+        
+        <span class="c1"># 1D CNN for feature extraction
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Conv1d</span><span class="p">(</span>
+            <span class="n">in_channels</span><span class="o">=</span><span class="n">input_size</span><span class="p">,</span> 
+            <span class="n">out_channels</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> 
+            <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">padding</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Conv1d</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">pool</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">MaxPool1d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        
+        <span class="c1"># BiLSTM for temporal dependencies
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">bilstm</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">LSTM</span><span class="p">(</span>
+            <span class="mi">64</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">,</span> 
+            <span class="n">batch_first</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">bidirectional</span><span class="o">=</span><span class="bp">True</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># Attention mechanism
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">attention</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_size</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        
+        <span class="c1"># Output layer
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_size</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="c1"># x shape: (batch, sequence, features)
+</span>        
+        <span class="c1"># CNN expects (batch, features, sequence)
+</span>        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">pool</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+        <span class="c1"># Back to (batch, sequence, features) for LSTM
+</span>        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        
+        <span class="c1"># BiLSTM
+</span>        <span class="n">lstm_out</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">bilstm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        
+        <span class="c1"># Attention mechanism
+</span>        <span class="n">attention_weights</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">softmax</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">attention</span><span class="p">(</span><span class="n">lstm_out</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">attention_weights</span> <span class="o">*</span> <span class="n">lstm_out</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        
+        <span class="c1"># Prediction
+</span>        <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fc</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">prediction</span>
+</code></pre></div></div>
+
+<h2 id="handling-multiple-time-horizons">Handling Multiple Time Horizons</h2>
+
+<p>Predict multiple future time steps:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">MultiHorizonLSTM</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">hidden_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">forecast_horizon</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">forecast_horizon</span> <span class="o">=</span> <span class="n">forecast_horizon</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">lstm</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">LSTM</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">batch_first</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">forecast_horizon</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">lstm_out</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">lstm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># Predict next 6 hours
+</span>        <span class="n">predictions</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fc</span><span class="p">(</span><span class="n">lstm_out</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="k">return</span> <span class="n">predictions</span>  <span class="c1"># Shape: (batch, forecast_horizon)
+</span></code></pre></div></div>
+
+<h2 id="evaluation-metrics">Evaluation Metrics</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">evaluate_forecasts</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+    <span class="s">"""Calculate key forecasting metrics"""</span>
+    
+    <span class="c1"># Mean Absolute Error
+</span>    <span class="n">mae</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nb">abs</span><span class="p">(</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">))</span>
+    
+    <span class="c1"># Root Mean Squared Error
+</span>    <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    
+    <span class="c1"># Mean Absolute Percentage Error
+</span>    <span class="n">mape</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nb">abs</span><span class="p">((</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">/</span> <span class="n">y_true</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+    
+    <span class="c1"># R² Score
+</span>    <span class="n">ss_res</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">((</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ss_tot</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">((</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_true</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">r2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">ss_res</span> <span class="o">/</span> <span class="n">ss_tot</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s">'MAE'</span><span class="p">:</span> <span class="n">mae</span><span class="p">,</span>
+        <span class="s">'RMSE'</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span>
+        <span class="s">'MAPE'</span><span class="p">:</span> <span class="n">mape</span><span class="p">,</span>
+        <span class="s">'R²'</span><span class="p">:</span> <span class="n">r2</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="practical-tips">Practical Tips</h2>
+
+<h3 id="1-sequence-length-selection">1. Sequence Length Selection</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Test different sequence lengths
+</span><span class="k">for</span> <span class="n">seq_len</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">72</span><span class="p">]:</span>  <span class="c1"># hours
+</span>    <span class="n">model</span> <span class="o">=</span> <span class="n">train_and_evaluate</span><span class="p">(</span><span class="n">seq_len</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Sequence length </span><span class="si">{</span><span class="n">seq_len</span><span class="si">}</span><span class="s">: RMSE = </span><span class="si">{</span><span class="n">model</span><span class="p">.</span><span class="n">rmse</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="2-handling-missing-data">2. Handling Missing Data</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">handle_missing_data</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="c1"># Forward fill for short gaps
+</span>    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'ffill'</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    
+    <span class="c1"># Interpolate for longer gaps
+</span>    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'linear'</span><span class="p">)</span>
+    
+    <span class="c1"># Mark remaining missing values
+</span>    <span class="n">df</span><span class="p">[</span><span class="s">'is_imputed'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">isna</span><span class="p">().</span><span class="nb">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">df</span>
+</code></pre></div></div>
+
+<h3 id="3-preventing-overfitting">3. Preventing Overfitting</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Early stopping
+</span><span class="k">class</span> <span class="nc">EarlyStopping</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">patience</span> <span class="o">=</span> <span class="n">patience</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">best_loss</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s">'inf'</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">val_loss</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">best_loss</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">best_loss</span> <span class="o">=</span> <span class="n">val_loss</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="p">.</span><span class="n">patience</span>
+</code></pre></div></div>
+
+<h2 id="real-world-results">Real-World Results</h2>
+
+<p>From our wind-to-hydrogen forecasting research:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metric</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>RMSE</td>
+      <td>2.3 kg/h</td>
+    </tr>
+    <tr>
+      <td>MAPE</td>
+      <td>4.1%</td>
+    </tr>
+    <tr>
+      <td>R²</td>
+      <td>0.96</td>
+    </tr>
+    <tr>
+      <td>Training Time</td>
+      <td>45 min</td>
+    </tr>
+    <tr>
+      <td>Inference Time</td>
+      <td>&lt;10ms</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="complete-example">Complete Example</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Load data
+</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'wind_hydrogen_data.csv'</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">scaler</span> <span class="o">=</span> <span class="n">prepare_energy_data</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">sequence_length</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+
+<span class="c1"># Split data
+</span><span class="n">train_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.8</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="n">train_size</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">train_size</span><span class="p">:]</span>
+<span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="n">train_size</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">train_size</span><span class="p">:]</span>
+
+<span class="c1"># Create data loaders
+</span><span class="n">train_dataset</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">TensorDataset</span><span class="p">(</span>
+    <span class="n">torch</span><span class="p">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> 
+    <span class="n">torch</span><span class="p">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">DataLoader</span><span class="p">(</span>
+    <span class="n">train_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+
+<span class="c1"># Initialize and train model
+</span><span class="n">model</span> <span class="o">=</span> <span class="n">CNNBiLSTMForecaster</span><span class="p">(</span><span class="n">input_size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">trained_model</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">)</span>
+
+<span class="c1"># Evaluate
+</span><span class="n">predictions</span> <span class="o">=</span> <span class="n">trained_model</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">evaluate_forecasts</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">predictions</span><span class="p">.</span><span class="n">detach</span><span class="p">().</span><span class="n">numpy</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="further-resources">Further Resources</h2>
+
+<h3 id="papers">Papers</h3>
+<ul>
+  <li>Hochreiter &amp; Schmidhuber, “Long Short-Term Memory” (1997)</li>
+  <li>Our work: “Multivariate CNN-Bi-LSTM temporal production forecasting for distributed wind-to-hydrogen integrated systems”</li>
+</ul>
+
+<h3 id="code-libraries">Code Libraries</h3>
+<ul>
+  <li><a href="https://pytorch.org/docs/stable/generated/torch.nn.LSTM.html">PyTorch LSTM Documentation</a></li>
+  <li><a href="https://www.tensorflow.org/tutorials/structured_data/time_series">TensorFlow Time Series</a></li>
+</ul>
+
+<h3 id="datasets">Datasets</h3>
+<ul>
+  <li><a href="https://www.nrel.gov/grid/wind-toolkit.html">Wind Integration National Dataset (WIND) Toolkit</a></li>
+  <li><a href="https://open-power-system-data.org/">Open Power System Data</a></li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>LSTM networks provide powerful tools for energy forecasting. Key takeaways:</p>
+
+<p>✅ Proper data preprocessing is critical
+✅ Bidirectional architectures improve accuracy
+✅ Hybrid CNN-LSTM models excel at complex patterns
+✅ Attention mechanisms enhance interpretability
+✅ Regular validation prevents overfitting</p>
+
+<p>Start with a simple LSTM, then progressively add complexity as needed!</p>
+
+<hr>
+
+<p><strong>Want to discuss LSTM applications in your research?</strong> Contact Doha Bounaim or explore our publications on AI-enabled energy forecasting!</p>
+  </section>
+
+  
+  
+  
+
+  <section class="background" data-size="page">
+    <!--
+  <background></background>
+  <dark></dark>
+  <size></size>
+-->
+
+
+<div class="post-nav">
+  <span>
+    
+      <i class="icon fa-solid fa-angle-left"></i> Previous post<br>
+      <a href="/lab-website/blogs/2024-04-20-research-award.html">
+        Dr. Li Receives Junior Faculty Outstanding Research Award
+      </a>
+    
+  </span>
+  <span>
+    
+      Next post <i class="icon fa-solid fa-angle-right"></i><br>
+      <a href="/lab-website/blogs/2025-01-10-intro-federated-learning.html">
+        Introduction to Federated Learning for Energy Systems
+      </a>
+    
+  </span>
+</div>
+  </section>
+
+
+    </main>
+    
+
+
+<footer class="background" style="--image: url('/lab-website/images/background.jpg')" data-dark="true" data-size="wide">
+  <!--
+    <div>
+      Extra details like contact info or address
+    </div>
+  -->
+
+  <div>
+    
+      
+      
+      
+
+
+
+  <div class="button-wrapper">
+    <a class="button" href="mailto:gli@me.msstate.edu" data-tooltip="Email" data-style="bare" aria-label="Email">
+      <i class="icon fa-solid fa-envelope"></i>
+      
+    </a>
+  </div>
+
+
+    
+      
+      
+      
+
+
+
+  <div class="button-wrapper">
+    <a class="button" href="https://orcid.org/0000-0003-2793-4615" data-tooltip="ORCID" data-style="bare" aria-label="ORCID">
+      <i class="icon fa-brands fa-orcid"></i>
+      
+    </a>
+  </div>
+
+
+    
+      
+      
+      
+
+
+
+  <div class="button-wrapper">
+    <a class="button" href="https://scholar.google.com/citations?user=_PR2PgEAAAAJ&hl=en" data-tooltip="Google Scholar" data-style="bare" aria-label="Google Scholar">
+      <i class="icon fa-brands fa-google"></i>
+      
+    </a>
+  </div>
+
+
+    
+      
+      
+      
+
+
+
+  <div class="button-wrapper">
+    <a class="button" href="https://www.linkedin.com/in/gang-li-034368b2" data-tooltip="LinkedIn" data-style="bare" aria-label="LinkedIn">
+      <i class="icon fa-brands fa-linkedin"></i>
+      
+    </a>
+  </div>
+
+
+    
+  </div>
+
+  <div>
+    © 2025
+    Gang Li Research Lab
+      |   Built with
+    <a href="https://github.com/greenelab/lab-website-template">
+      Lab Website Template
+    </a>
+  </div>
+
+  <input type="checkbox" class="dark-toggle" data-tooltip="Dark mode" aria-label="toggle dark mode" oninput="onDarkToggleChange(event)">
+</footer>
+
+  </body>
+</html>
