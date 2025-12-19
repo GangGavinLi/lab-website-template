@@ -6,6 +6,9 @@
 
 - id: doi:10.1016/j.uclim.2025.102669
   image: images/publications/2025-laeeq-grid.jpg
+
+- id: doi:10.1016/j.mechmachtheory.2025.106286
+  image: images/publications/2025-zheng-stiffness.jpg
   
 # Federated Learning for Wind
 - id: doi:10.1115/es2025-156364
