@@ -69,22 +69,13 @@ This growth has been recognized by the university and broader community:
 
 ## Looking Forward
 
-With this strong foundation, we're positioned to make even greater impact in 2025:
+With this strong foundation, we're positioned to make an even greater impact in 2026:
 
 - Expanding collaborations with national laboratories and industry partners
 - Launching new research initiatives in hydrogen production and storage
 - Growing our team with additional talented graduate students
 - Advancing technology transfer through our Transfinity IVT commercialization
 
-## Join Our Team
-
-We're actively recruiting motivated Ph.D. students interested in:
-- AI and machine learning for energy systems
-- Renewable energy technologies
-- Predictive maintenance and condition monitoring
-- Advanced mechanical design and control
-
-Contact Dr. Gang Li (gli@me.msstate.edu) to learn more about opportunities!
 
 ---
 
