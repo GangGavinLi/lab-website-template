@@ -78,5 +78,6 @@ With this strong foundation, we're positioned to make an even greater impact in 
 
 
 ---
+## Acknowledgement
 
-*This achievement represents the collective effort of our entire team, our funding agencies (NSF, DOE), and our university. We're grateful for the support that makes this research possible and excited about the innovations ahead.*
+This achievement represents the collective effort of our entire team, funding agencies (NSF, DOE, VentrueWell), our university, and partners. We're grateful for the support that makes this research possible and excited about the innovations ahead.
