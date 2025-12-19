@@ -2,20 +2,17 @@
 title: Blog
 nav:
   order: 6
-  tooltip: Musings and miscellany
+  tooltip: Learning Materials and Musings
 ---
 
 # {% include icon.html icon="fa-solid fa-feather-pointed" %}Blog
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Welcome to our collection of educational resources, tutorials, and learning materials on AI, renewable energy systems, and mechanical engineering topics.
 
 {% include section.html %}
 
 {% include search-box.html %}
 
-{% include tags.html tags=site.tags %}
-
 {% include search-info.html %}
 
-{% include list.html data="blogs" component="blog-excerpt" %}
+{% include list.html data="blog" component="post-excerpt" %}
